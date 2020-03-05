@@ -1,20 +1,71 @@
 package com.example.helloworld;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.strictmode.WebViewMethodCalledOnWrongThreadViolation;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
+
 public class HomePage extends AppCompatActivity {
     Button logout;
 
+    TabLayout tabLayout;
+    ViewPager viewPager;
+    TabItem tab1, tab2, tab3;
+
+    public PagerAdapter pagerAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        tab1 = (TabItem) findViewById(R.id.tab1);
+        tab1 = (TabItem) findViewById(R.id.tab2);
+        tab1 = (TabItem) findViewById(R.id.tab3);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+
+        pagerAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(pagerAdapter);
+
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
+
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+                if (tab.getPosition() == 0){
+                    pagerAdapter.notifyDataSetChanged();
+                }else if (tab.getPosition() == 1){
+                    pagerAdapter.notifyDataSetChanged();
+                }else if (tab.getPosition() == 2){
+                    pagerAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         logout = findViewById(R.id.buttonLogout);
 
@@ -31,5 +82,6 @@ public class HomePage extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
 
 }

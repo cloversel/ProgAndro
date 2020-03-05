@@ -1,8 +1,25 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\MSI\\Documents\\GitHub\\ProgAndro\\HelloWorld\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-large-v4\\values-large-v4.xml",
+            "outputFile": "D:\\Android Studio Save\\HelloWorld\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-large-v4\\values-large-v4.xml",
             "map": [
+                {
+                    "source": "C:\\Users\\MSI\\.gradle\\caches\\transforms-2\\files-2.1\\c7eb9cd3508ac3959447c14fd76c9fb9\\material-1.0.0\\res\\values-large-v4\\values-large-v4.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,177",
+                        "endColumns": "121,133",
+                        "endOffsets": "172,306"
+                    },
+                    "to": {
+                        "startLines": "11,12",
+                        "startColumns": "4,4",
+                        "startOffsets": "752,874",
+                        "endColumns": "121,133",
+                        "endOffsets": "869,1003"
+                    }
+                },
                 {
                     "source": "C:\\Users\\MSI\\.gradle\\caches\\transforms-2\\files-2.1\\697f71c0c12135256cbfe98df498a7e4\\appcompat-1.0.2\\res\\values-large-v4\\values-large-v4.xml",
                     "from": {
