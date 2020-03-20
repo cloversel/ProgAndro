@@ -1069,8 +1069,10 @@ id beginning
 id blocking
 id bottom
 id button
+id buttonCancelJob
 id buttonLogout
 id buttonPanel
+id buttonStartJob
 id cancel_action
 id center
 id center_horizontal

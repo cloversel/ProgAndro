@@ -7,6 +7,12 @@
     android:orientation="vertical"
     tools:context=".HomePage">
 
+    <Button
+        android:id="@+id/buttonLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Log Out" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
@@ -43,11 +49,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Home Page" />
-
-    <Button
-        android:id="@+id/buttonLogout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Log Out" />
 
 </LinearLayout>
