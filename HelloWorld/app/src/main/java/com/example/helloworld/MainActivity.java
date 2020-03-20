@@ -1,11 +1,17 @@
 package com.example.helloworld;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import androidx.core.view.KeyEventDispatcher;
 
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +23,11 @@ public class MainActivity extends AppCompatActivity {
     EditText email, password;
     Button button;
 
+    SharedPreferences pref;
+
+    public static final String TAG = "MainActivity";
+    private Button btnStartJob;
+    private Button btnCancelJob;
 
 
     @Override
@@ -24,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        btnStartJob = findViewById(R.id.buttonStartJob);
+        btnCancelJob = findViewById(R.id.buttonCancelJob);
+
+        pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        if (pref.getString("KEY1",null).equals("Home")){
+            GoToHomePage();
+        }
         email = findViewById(R.id.editTextEmail);
         password = findViewById(R.id.editTextPassword);
         button = findViewById((R.id.button));
@@ -41,6 +59,32 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public void scheduleJob(View view){
+        ComponentName componentName = new ComponentName(getApplicationContext(), MyJobService.class);
+        JobInfo info = new JobInfo.Builder(123, componentName)
+                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
+                .setPersisted(true)
+                .setPeriodic(15 * 60 * 1000)
+                .build();
+
+        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+        int resultCode = scheduler.schedule(info);
+        if(resultCode == JobScheduler.RESULT_SUCCESS){
+            Log.i(TAG, "scheduleJob: Job Scheduled");
+        }else{
+            Log.i(TAG, "scheduleJob: Job Scheduling Failed");
+        }
+    }
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public void cancelJob(View view){
+        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+        scheduler.cancel(123);
+        Log.i(TAG, "cancelJob");
+    }
+
+
     public void GoToHomePage(){
         Intent intent = new Intent(this, HomePage.class);
         startActivity(intent);

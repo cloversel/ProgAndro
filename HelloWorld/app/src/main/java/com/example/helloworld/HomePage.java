@@ -7,8 +7,10 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.strictmode.WebViewMethodCalledOnWrongThreadViolation;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -17,6 +19,9 @@ import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
 public class HomePage extends AppCompatActivity {
+
+    SharedPreferences pref;
+
     Button logout;
 
     TabLayout tabLayout;
@@ -29,6 +34,14 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+        pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        final SharedPreferences.Editor editor = pref.edit();
+        editor.putString("KEY1", "Home");
+        editor.commit();
+        Log.d("Text Shared Preferences", pref.getString("KEY1", null));
+
+
         setContentView(R.layout.activity_home_page);
 
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
@@ -73,6 +86,10 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Logout", Toast.LENGTH_LONG).show();
+                editor.remove("KEY1");
+                editor.putString("KEY1", "Out");
+                editor.commit();
+
                 BackToLogin();
             }
         });
