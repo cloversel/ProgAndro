@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MainActivity";
     private Button btnStartJob;
     private Button btnCancelJob;
+    private Button btnFirebasePage;
 
 
     @Override
@@ -87,6 +88,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void GoToHomePage(){
         Intent intent = new Intent(this, HomePage.class);
+        startActivity(intent);
+    }
+
+    public void GoToFirebasePage(View view){
+        Intent intent = new Intent(this, FirebasePage.class);
         startActivity(intent);
     }
 

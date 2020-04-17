@@ -53,7 +53,8 @@ public class HomePage extends AppCompatActivity {
         pagerAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
 
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
 
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
