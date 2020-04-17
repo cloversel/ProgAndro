@@ -38,8 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
         btnStartJob = findViewById(R.id.buttonStartJob);
         btnCancelJob = findViewById(R.id.buttonCancelJob);
+        btnFirebasePage = findViewById(R.id.firebase);
 
-        pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+       /* pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         if (pref.getString("KEY1",null).equals("Home")){
             GoToHomePage();
         }
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             }
-        });
+        });   */
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

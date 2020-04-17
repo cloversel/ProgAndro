@@ -65,9 +65,9 @@ public class FirebasePage extends AppCompatActivity {
             }
         });
 
-        buttonCari.setOnClickListener(new View.OnClickListener(){
+        buttonCari.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 getDataMahasiswa();
             }
         });
@@ -75,42 +75,6 @@ public class FirebasePage extends AppCompatActivity {
 
     }
 
-    public class Mahasiswa {
-
-        private String nim;
-        private String nama;
-        private String phone;
-
-        public Mahasiswa(String nim, String nama, String phone) {
-            this.nim = nim;
-            this.nama = nama;
-            this.phone = phone;
-        }
-
-        public String getNama() {
-            return nama;
-        }
-
-        public void setNama(String nama) {
-            this.nama = nama;
-        }
-
-        public String getNim() {
-            return nim;
-        }
-
-        public void setNim(String nim) {
-            this.nim = nim;
-        }
-
-        public String getPhone() {
-            return phone;
-        }
-
-        public void setPhone(String phone) {
-            this.phone = phone;
-        }
-    }
 
     private void tambahMahasiswa() {
 
@@ -119,7 +83,7 @@ public class FirebasePage extends AppCompatActivity {
                 phoneMhs.getText().toString());
 
 
-        firebaseFirestoreDb.collection("DaftarMhs").document().set(mhs)
+        firebaseFirestoreDb.collection("DaftarMhs").document(noMhs.getText().toString()).set(mhs)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -138,7 +102,7 @@ public class FirebasePage extends AppCompatActivity {
     }
 
     private void getDataMahasiswa() {
-        DocumentReference docRef = firebaseFirestoreDb.collection("DaftarMhs").document("mhs1");
+        DocumentReference docRef = firebaseFirestoreDb.collection("DaftarMhs").document(noMhs.getText().toString());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -162,7 +126,7 @@ public class FirebasePage extends AppCompatActivity {
     }
 
     private void deleteDataMahasiswa() {
-        firebaseFirestoreDb.collection("DaftarMhs").document("mhs1")
+        firebaseFirestoreDb.collection("DaftarMhs").document(noMhs.getText().toString())
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
