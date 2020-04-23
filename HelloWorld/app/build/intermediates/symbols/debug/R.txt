@@ -1107,7 +1107,7 @@ int id barrier 0x7f080022
 int id beginning 0x7f080023
 int id blocking 0x7f080024
 int id bottom 0x7f080025
-int id button 0x7f080026
+int id btnlogin 0x7f080026
 int id buttonCancelJob 0x7f080027
 int id buttonLogout 0x7f080028
 int id buttonPanel 0x7f080029
@@ -1140,8 +1140,8 @@ int id design_navigation_view 0x7f080043
 int id dimensions 0x7f080044
 int id direct 0x7f080045
 int id disableHome 0x7f080046
-int id editTextEmail 0x7f080047
-int id editTextPassword 0x7f080048
+int id editTextNama 0x7f080047
+int id editTextNim 0x7f080048
 int id edit_query 0x7f080049
 int id end 0x7f08004a
 int id end_padder 0x7f08004b

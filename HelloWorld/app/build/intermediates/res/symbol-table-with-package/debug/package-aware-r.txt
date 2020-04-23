@@ -1108,7 +1108,7 @@ id barrier
 id beginning
 id blocking
 id bottom
-id button
+id btnlogin
 id buttonCancelJob
 id buttonLogout
 id buttonPanel
@@ -1141,8 +1141,8 @@ id design_navigation_view
 id dimensions
 id direct
 id disableHome
-id editTextEmail
-id editTextPassword
+id editTextNama
+id editTextNim
 id edit_query
 id end
 id end_padder

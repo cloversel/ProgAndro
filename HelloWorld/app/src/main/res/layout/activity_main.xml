@@ -17,21 +17,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextEmail"
+        android:id="@+id/editTextNim"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:hint="NIM"
         android:inputType="textEmailAddress" />
 
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/editTextNama"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
-        android:inputType="textPassword" />
+        android:hint="NAMA" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnlogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Login" />
@@ -40,7 +39,7 @@
         android:id="@+id/firebase"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Firebase Page(?)"
+        android:text="Firebase Page"
         android:onClick="GoToFirebasePage"/>
 
 

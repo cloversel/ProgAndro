@@ -5254,7 +5254,7 @@ public final class R {
     public static final int beginning=0x7f080023;
     public static final int blocking=0x7f080024;
     public static final int bottom=0x7f080025;
-    public static final int button=0x7f080026;
+    public static final int btnlogin=0x7f080026;
     public static final int buttonCancelJob=0x7f080027;
     public static final int buttonLogout=0x7f080028;
     public static final int buttonPanel=0x7f080029;
@@ -5287,8 +5287,8 @@ public final class R {
     public static final int dimensions=0x7f080044;
     public static final int direct=0x7f080045;
     public static final int disableHome=0x7f080046;
-    public static final int editTextEmail=0x7f080047;
-    public static final int editTextPassword=0x7f080048;
+    public static final int editTextNama=0x7f080047;
+    public static final int editTextNim=0x7f080048;
     public static final int edit_query=0x7f080049;
     public static final int end=0x7f08004a;
     public static final int end_padder=0x7f08004b;
