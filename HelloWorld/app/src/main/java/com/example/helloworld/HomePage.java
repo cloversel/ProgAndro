@@ -35,11 +35,11 @@ public class HomePage extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-        final SharedPreferences.Editor editor = pref.edit();
-        editor.putString("KEY1", "Home");
-        editor.commit();
-        Log.d("Text Shared Preferences", pref.getString("KEY1", null));
+      //  pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+     //   final SharedPreferences.Editor editor = pref.edit();
+     //   editor.putString("KEY1", "Home");
+     //   editor.commit();
+     //   Log.d("Text Shared Preferences", pref.getString("KEY1", null));
 
 
         setContentView(R.layout.activity_home_page);
@@ -87,9 +87,9 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Logout", Toast.LENGTH_LONG).show();
-                editor.remove("KEY1");
-                editor.putString("KEY1", "Out");
-                editor.commit();
+           //     editor.remove("KEY1");
+            //    editor.putString("KEY1", "Out");
+             //   editor.commit();
 
                 BackToLogin();
             }

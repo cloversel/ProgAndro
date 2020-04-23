@@ -102,11 +102,12 @@ public class FirebasePage extends AppCompatActivity {
     }
 
     private void getDataMahasiswa() {
+
         DocumentReference docRef = firebaseFirestoreDb.collection("DaftarMhs").document(noMhs.getText().toString());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
+                if (task.isComplete()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Mahasiswa mhs = document.toObject(Mahasiswa.class);

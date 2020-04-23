@@ -1,5 +1,6 @@
 package com.example.helloworld;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.KeyEventDispatcher;
@@ -17,11 +18,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText email, password;
-    Button button;
+    EditText nim, nama;
+    Button login;
 
     SharedPreferences pref;
 
@@ -29,7 +40,10 @@ public class MainActivity extends AppCompatActivity {
     private Button btnStartJob;
     private Button btnCancelJob;
     private Button btnFirebasePage;
+    private FirebaseFirestore firebaseFirestoreDb;
 
+    String idNim;
+    String passNama;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +53,21 @@ public class MainActivity extends AppCompatActivity {
         btnStartJob = findViewById(R.id.buttonStartJob);
         btnCancelJob = findViewById(R.id.buttonCancelJob);
         btnFirebasePage = findViewById(R.id.firebase);
+        nim = findViewById(R.id.editTextNim);
+        nama = findViewById(R.id.editTextNama);
+        login = findViewById(R.id.btnlogin);
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getDataMahasiswa();
+                if(idNim == nim.toString()){
+                    if (passNama == nama.toString()){
+                        GoToHomePage();
+                    }
+                }
+            }
+        });
 
        /* pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         if (pref.getString("KEY1",null).equals("Home")){
@@ -95,6 +124,33 @@ public class MainActivity extends AppCompatActivity {
     public void GoToFirebasePage(View view){
         Intent intent = new Intent(this, FirebasePage.class);
         startActivity(intent);
+    }
+
+    private void getDataMahasiswa() {
+
+        DocumentReference docRef = firebaseFirestoreDb.collection("DaftarMhs").document(nim.getText().toString());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isComplete()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Mahasiswa mhs = document.toObject(Mahasiswa.class);
+                        //noMhs.setText(mhs.getNim());
+                      //  namaMhs.setText(mhs.getNama());
+                       // phoneMhs.setText(mhs.getPhone());
+                        idNim = mhs.getNim();
+                        passNama = mhs.getNama();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Document tidak ditemukan",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Document error : " + task.getException(),
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
 
