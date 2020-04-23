@@ -17,19 +17,27 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.auth.User;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class FirebasePage extends AppCompatActivity {
 
-    private EditText noMhs;
-    private EditText namaMhs;
-    private EditText phoneMhs;
+    private EditText emailMhs;
+    private EditText passMhs;
+    private EditText confirmMhs;
     private Button buttonSimpan;
     private Button buttonHapus;
     private Button buttonCari;
     private FirebaseFirestore firebaseFirestoreDb;
+    private FirebaseAuth myFirebaseAuth;
+    private String UserID;
 
 
     @Override
@@ -37,21 +45,28 @@ public class FirebasePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_firebase_page);
 
-        noMhs = (EditText) findViewById(R.id.noMhs);
-        namaMhs = (EditText) findViewById(R.id.namaMhs);
-        phoneMhs = (EditText) findViewById(R.id.phoneMhs);
+        emailMhs = (EditText) findViewById(R.id.emailMhs);
+        passMhs = (EditText) findViewById(R.id.passwordMhs);
+        confirmMhs = (EditText) findViewById(R.id.confirmPassMhs);
         buttonSimpan = (Button) findViewById(R.id.simpanButton);
         buttonHapus = (Button) findViewById(R.id.hapusButton);
         buttonCari = (Button) findViewById(R.id.cariButton);
 
         firebaseFirestoreDb = FirebaseFirestore.getInstance();
+        myFirebaseAuth = FirebaseAuth.getInstance();
 
         buttonSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //sanity check
-                if (!noMhs.getText().toString().isEmpty() && !namaMhs.getText().toString().isEmpty()) {
-                    tambahMahasiswa();
+                if (!emailMhs.getText().toString().isEmpty() && !passMhs.getText().toString().isEmpty()) {
+                    if (passMhs.getText().toString().equals(confirmMhs.getText().toString())){
+
+                        tambahMahasiswa();
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Konfirmasi Password salah",
+                                Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(getApplicationContext(), "No dan Nama Mhs tidak boleh kosong",
                             Toast.LENGTH_SHORT).show();
@@ -65,12 +80,12 @@ public class FirebasePage extends AppCompatActivity {
             }
         });
 
-        buttonCari.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getDataMahasiswa();
-            }
-        });
+      //  buttonCari.setOnClickListener(new View.OnClickListener() {
+      //      @Override
+      //      public void onClick(View v) {
+      //          getDataMahasiswa();
+      //      }
+       // });
 
 
     }
@@ -78,30 +93,43 @@ public class FirebasePage extends AppCompatActivity {
 
     private void tambahMahasiswa() {
 
-        Mahasiswa mhs = new Mahasiswa(noMhs.getText().toString(),
-                namaMhs.getText().toString(),
-                phoneMhs.getText().toString());
+     //   Mahasiswa mhs = new Mahasiswa(noMhs.getText().toString(),
+      //          namaMhs.getText().toString(),
+      //          phoneMhs.getText().toString());
 
 
-        firebaseFirestoreDb.collection("DaftarMhs").document(noMhs.getText().toString()).set(mhs)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(getApplicationContext(), "Mahasiswa berhasil didaftarkan",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(), "ERROR" + e.toString(),
-                                Toast.LENGTH_SHORT).show();
-                        Log.d("TAG", e.toString());
-                    }
-                });
+        myFirebaseAuth.createUserWithEmailAndPassword(emailMhs.getText().toString(),passMhs.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    UserID = myFirebaseAuth.getCurrentUser().getUid();
+                    Map<String, Object> user = new HashMap<>();
+                    user.put("email", emailMhs.getText().toString());
+                    user.put("password", passMhs.getText().toString());
+                    firebaseFirestoreDb.collection("DaftarMhs").document(UserID).set(user)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(getApplicationContext(), "Mahasiswa berhasil didaftarkan",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getApplicationContext(), "ERROR" + e.toString(),
+                                            Toast.LENGTH_SHORT).show();
+                                    Log.d("TAG", e.toString());
+                                }
+                            });
+                }
+            }
+        });
+
+
     }
 
-    private void getDataMahasiswa() {
+   /* private void getDataMahasiswa() {
 
         DocumentReference docRef = firebaseFirestoreDb.collection("DaftarMhs").document(noMhs.getText().toString());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -124,17 +152,17 @@ public class FirebasePage extends AppCompatActivity {
                 }
             }
         });
-    }
+    }  */
 
     private void deleteDataMahasiswa() {
-        firebaseFirestoreDb.collection("DaftarMhs").document(noMhs.getText().toString())
+        firebaseFirestoreDb.collection("DaftarMhs").document(emailMhs.getText().toString())
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        noMhs.setText("");
-                        namaMhs.setText("");
-                        phoneMhs.setText("");
+                        emailMhs.setText("");
+                        passMhs.setText("");
+                        confirmMhs.setText("");
                         Toast.makeText(getApplicationContext(), "Mahasiswa berhasil dihapus",
                                 Toast.LENGTH_SHORT).show();
                     }

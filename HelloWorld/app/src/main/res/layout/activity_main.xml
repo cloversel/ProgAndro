@@ -20,14 +20,15 @@
         android:id="@+id/editTextNim"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="NIM"
+        android:hint="email"
         android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/editTextNama"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="NAMA" />
+        android:hint="password"
+        android:inputType="textPassword"/>
 
     <Button
         android:id="@+id/btnlogin"
