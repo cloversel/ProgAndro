@@ -1124,6 +1124,7 @@ id chronometer
 id clip_horizontal
 id clip_vertical
 id collapseActionView
+id confirmPassMhs
 id container
 id content
 id contentPanel
@@ -1144,6 +1145,7 @@ id disableHome
 id editTextNama
 id editTextNim
 id edit_query
+id emailMhs
 id end
 id end_padder
 id enterAlways
@@ -1190,10 +1192,8 @@ id mini
 id mtrl_child_content_container
 id mtrl_internal_children_alpha_tag
 id multiply
-id namaMhs
 id navigation_header_container
 id never
-id noMhs
 id none
 id normal
 id notification_background
@@ -1205,8 +1205,8 @@ id parallax
 id parent
 id parentPanel
 id parent_matrix
+id passwordMhs
 id percent
-id phoneMhs
 id pin
 id progress_circular
 id progress_horizontal

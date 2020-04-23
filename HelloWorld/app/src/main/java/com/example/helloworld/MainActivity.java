@@ -21,10 +21,13 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.auth.FirebaseAuthException;
 
 import java.util.List;
 
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnCancelJob;
     private Button btnFirebasePage;
     private FirebaseFirestore firebaseFirestoreDb;
+    private FirebaseAuth myFirebaseAuth;
 
     String idNim;
     String passNama;
@@ -57,15 +61,13 @@ public class MainActivity extends AppCompatActivity {
         nama = findViewById(R.id.editTextNama);
         login = findViewById(R.id.btnlogin);
 
+        myFirebaseAuth = FirebaseAuth.getInstance();
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getDataMahasiswa();
-                if(idNim == nim.toString()){
-                    if (passNama == nama.toString()){
-                        GoToHomePage();
-                    }
-                }
+
             }
         });
 
@@ -128,7 +130,20 @@ public class MainActivity extends AppCompatActivity {
 
     private void getDataMahasiswa() {
 
-        DocumentReference docRef = firebaseFirestoreDb.collection("DaftarMhs").document(nim.getText().toString());
+        myFirebaseAuth.signInWithEmailAndPassword(nim.getText().toString(), nama.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(getApplicationContext(), "Login Berhasil", Toast.LENGTH_SHORT).show();
+                    GoToHomePage();
+                    finish();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Login gagal", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+     /*   DocumentReference docRef = firebaseFirestoreDb.collection("DaftarMhs").document(nim.getText().toString());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -150,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 }
             }
-        });
+        });  */
     }
 
 
