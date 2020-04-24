@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.KeyEventDispatcher;
+import androidx.fragment.app.Fragment;
 
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
@@ -127,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, FirebasePage.class);
         startActivity(intent);
     }
+
 
     private void getDataMahasiswa() {
 
