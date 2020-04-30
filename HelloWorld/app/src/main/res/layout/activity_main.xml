@@ -44,6 +44,12 @@
         android:text="Firebase Page"
         android:onClick="GoToFirebasePage"/>
 
+    <Button
+        android:id="@+id/orientation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Check Orientation"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"

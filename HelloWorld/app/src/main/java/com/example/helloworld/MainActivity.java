@@ -11,9 +11,11 @@ import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Surface;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,7 +38,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     EditText nim, nama;
-    Button login;
+    Button login, orient;
 
     SharedPreferences pref;
 
@@ -50,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
     String idNim;
     String passNama;
 
+    int rotation;
+
+    int orientation;
+    CharSequence text;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         nim = findViewById(R.id.editTextNim);
         nama = findViewById(R.id.editTextNama);
         login = findViewById(R.id.btnlogin);
+        orient = findViewById(R.id.orientation);
 
         myFirebaseAuth = FirebaseAuth.getInstance();
 
@@ -92,9 +100,39 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });   */
+
+
+
+
+        orient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rotation = getWindowManager().getDefaultDisplay().getRotation();
+                switch(rotation){
+                    case Surface.ROTATION_0:
+                        text = "Screen Orientation Portrait";
+                        break;
+                    case Surface.ROTATION_90:
+                        text = "Screen Orientation Landscape";
+                        break;
+                    case Surface.ROTATION_180:
+                        text = "Screen Orientation Reverse Portrait";
+                        break;
+                    case Surface.ROTATION_270:
+                        text = "Screen Orientation Reverse Landscape";
+                        break;
+                    default:
+                        text = "Screen Orientation Landscape";
+                        break;
+                }
+                Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
+                toast.show();
+            }
+        });
+
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+  /*  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void scheduleJob(View view){
         ComponentName componentName = new ComponentName(getApplicationContext(), MyJobService.class);
         JobInfo info = new JobInfo.Builder(123, componentName)
@@ -117,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
         scheduler.cancel(123);
         Log.i(TAG, "cancelJob");
     }
-
+*/
 
     public void GoToHomePage(){
         Intent intent = new Intent(this, HomePage.class);

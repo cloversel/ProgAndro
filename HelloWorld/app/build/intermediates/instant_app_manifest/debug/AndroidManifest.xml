@@ -10,6 +10,7 @@
         android:targetSdkVersion="29" />
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
@@ -30,7 +31,9 @@
         android:theme="@style/AppTheme" >
         <activity android:name="com.example.helloworld.FirebasePage" />
         <activity android:name="com.example.helloworld.HomePage" />
-        <activity android:name="com.example.helloworld.MainActivity" >
+        <activity
+            android:name="com.example.helloworld.MainActivity"
+            android:screenOrientation="fullSensor" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
