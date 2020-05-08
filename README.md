@@ -10,5 +10,7 @@ Pertemuan 8 (Firebase) fixed. | PR pertemuan 8 (Login Firebase Auth email and pa
 
 Pertemuan 9 (Komponen Perangkat Keras). Perubahan ada di Fragment1. setelah login. | PR Orientation : Done.
 
+Pertemuan 10 (Geospasial) Menunjukkan lokasi saat ini di google map : Done. 
+
 
 note: Jika ingin langsung login, bisa menggunakan data email = admin@gmail.com, password = admin123
