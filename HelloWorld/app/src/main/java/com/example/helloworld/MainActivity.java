@@ -167,6 +167,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void GoToGeospasialPage(View view){
+        Intent intent = new Intent(this, GeospasialPage.class);
+        startActivity(intent);
+    }
 
     private void getDataMahasiswa() {
 

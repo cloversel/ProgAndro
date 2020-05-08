@@ -940,6 +940,10 @@
         "source": "C:\\Users\\MSI\\.gradle\\caches\\transforms-2\\files-2.1\\d53a00f69c7c374b3d1ab4ddeb50ea9c\\appcompat-1.0.2\\res\\anim\\abc_slide_out_top.xml"
     },
     {
+        "merged": "D:\\Android Studio Save\\HelloWorld\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_geospasial_page.xml.flat",
+        "source": "D:\\Android Studio Save\\HelloWorld\\app\\src\\main\\res\\layout\\activity_geospasial_page.xml"
+    },
+    {
         "merged": "D:\\Android Studio Save\\HelloWorld\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_star_black_48dp.png.flat",
         "source": "C:\\Users\\MSI\\.gradle\\caches\\transforms-2\\files-2.1\\d53a00f69c7c374b3d1ab4ddeb50ea9c\\appcompat-1.0.2\\res\\drawable-xhdpi-v4\\abc_ic_star_black_48dp.png"
     },

@@ -50,6 +50,13 @@
         android:layout_height="wrap_content"
         android:text="Check Orientation"/>
 
+    <Button
+        android:id="@+id/geospasial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Geospasial Page"
+        android:onClick="GoToGeospasialPage"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
